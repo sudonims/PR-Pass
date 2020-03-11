@@ -1,0 +1,18 @@
+{
+    "browser_action":{
+        "default_popup":"popup.html",
+        "default_title":"password generator"
+    },
+    "web_accessible_resources": [
+        "cipher.json"
+    ],
+    "background":{
+        "scripts":["background.js"]
+    },
+    "permissions": ["storage","notifications"],
+    "name": "password generator",
+    "version": "1.0",
+    "description": "Easy to create passwords",
+    "author": "Ekansh Gupta - Nimish Shah",
+    "manifest_version": 2
+}

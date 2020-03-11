@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link href="https://cdn.muicss.com/mui-0.10.1/css/mui.min.css" rel="stylesheet" type="text/css" />
+        <script src="https://cdn.muicss.com/mui-0.10.1/js/mui.min.js"></script> -->
+        <script src="popup.js"></script>
+        <style>
+            body {
+                background-color: rgb(41, 41, 41);
+                color: white;
+            }
+            #gen-pass{
+                
+            }
+            button {
+                border-radius: 14px;
+                border-color: black;
+                background-color: rgb(127, 145, 151);
+            }
+            input{
+                color: white;
+                background-color: black;
+                border-radius: 15px;
+                border-top: hidden;
+                border-color: black;
+                padding: 5px;
+            }
+            input:focus{
+                outline: none;
+                transition-delay: 100ms;
+                transition-duration: 500ms;
+                border-bottom-width: 2px;
+                border-color: rgb(210, 138, 30);
+            }
+        </style>
+    </head>
+    <body id="body">
+        <!-- <div class="mui-textfield"> -->
+            <input type="text" class="a" id="lucky" placeholder="Lucky Number" />
+        <!-- </div> -->
+        <!-- <div class="mui-textfield"> -->
+            <input type="password" id="password" placeholder="Enter Password" />
+        <!-- </div> -->
+        <p id="gen-pass"></p>
+        <button id="submit" type="button">Submit</button>
+        <button id="edit" type="button">Edit</button>
+    </body>
+
+</html>
