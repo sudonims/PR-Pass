@@ -94,9 +94,11 @@ xhr.onreadystatechange = () =>{
 
                         luck+=initPass.init_pass.length + (ans.length*initPass.init_pass.length);
                         luck%=72;
-                        
-                        ans1=sample[luck] + sample[(luck+100)%72] + ans1;
-                        ans1+=sample[((luck+200)%10)+62] + sample[(luck+300)%72];
+                        ans1=sample[luck] + sample[((luck+111)%10)+62] + ans1;
+                        ans1+=sample[((luck+222)%10)+62] + sample[(luck+300)%72];
+
+                        // ans1=sample[luck] + sample[(luck+100)%72] + ans1;
+                        // ans1+=sample[((luck+200)%10)+62] + sample[(luck+300)%72];
                         console.log(ans1);
                         chrome.storage.sync.set({gen_pass:ans1},()=>{
                             chrome.runtime.sendMessage({generated:true});
