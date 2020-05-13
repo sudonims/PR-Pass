@@ -12,7 +12,7 @@ var x = benchmarkOriginal.map((val, i) => {
     return i;
 });
 
-// plot([{ x: xOriginal, y: benchmarkOriginal, type: "line" }]);
+plot([{ x: x, y: benchmarkOriginal, type: "line" }]);
 
 
 
