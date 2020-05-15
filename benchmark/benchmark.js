@@ -74,7 +74,10 @@ const generatedPass = passwordData.map( (pass, i) => {
     luck += 100;
     luck %= 72;
     ans1 = sample[luck].toString();
-    ans1 = ans1.repeat(12);
+    for(let i=1;i<12;i++){
+        ans1+=(sample[ans1[i-1].charCodeAt(0)%72]);
+    }
+    console.log(ans1);
     // console.log('initial', ans1);
     // ans1.replace(ans1[0],)
 
@@ -103,7 +106,7 @@ const generatedPass = passwordData.map( (pass, i) => {
     return ans1;
 });
 
-console.log(generatedPass[4]);
+// console.log(generatedPass[4]);
 
 var benchmarkGenerated = generatedPass.map((pass)=>{
     return zxcvbn(pass).score;

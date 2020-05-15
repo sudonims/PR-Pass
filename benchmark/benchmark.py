@@ -1,6 +1,7 @@
 from zxcvbn import zxcvbn 
 import json
 import matplotlib.pyplot as plt 
+import numpy as np
 
 sample = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
     "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
@@ -48,16 +49,13 @@ def gen_pass(password,num):
     # // console.log('ans', ans);
     luck += 100;
     luck %= 72;
-    ans1 = sample[luck] * 12
+    ans1 = sample[luck]
+    for i in range(1,12):
+        ans1+=(sample[ord(ans1[i-1])%72])
     # print(ans1)
-    # print(len(ans[0]))
-    # // console.log('initial', ans1);
-    # // ans1.replace(ans1[0],)
-
     for i in range(0,len(ans)):
         ans1 = add(ans1, ans[i])
-        # // console.log('in loop',ans1);
-    # // console.log(ans1);
+    
     luck += len(password) + (len(ans) * len(password))
     luck %= 72;
     char1 = sample[(luck % 26) + 26] + sample[((luck + 111) % 10) + 62];
@@ -87,17 +85,56 @@ for i in range(len(passwordData)):
 
 # print(generatedPasswordData)
 
-benchmarkOriginal = []
+scoreOriginal = []
+guessOriginal = []
+crackOriginal = []
 
 for i in passwordData:
-    benchmarkOriginal.append(zxcvbn(i)['score']);
+    scoreOriginal.append(zxcvbn(i)['score']);
+    guessOriginal.append(zxcvbn(i)['guesses_log10']);
+    crackOriginal.append(zxcvbn(i)['crack_times_seconds']['offline_slow_hashing_1e4_per_second']);
 
-benchmarkGenerated = []
-
+scoreGenerated = []
+guessGenerated = []
+crackGenerated = []
 for i in generatedPasswordData:
-    benchmarkGenerated.append(zxcvbn(i)['score']);
+    scoreGenerated.append(zxcvbn(i)['score']);
+    guessGenerated.append(zxcvbn(i)['guesses_log10']);
+    crackGenerated.append(zxcvbn(i)['crack_times_seconds']['offline_slow_hashing_1e4_per_second'])
 
-# print(benchmarkGenerated)
 
+x = np.array([i for i in range(len(scoreGenerated))])
+
+plt.plot(x,scoreOriginal,color="red",label="original")
+plt.plot(x,scoreGenerated,color="green",label="generated")
+plt.xlabel('Passwords')
+plt.ylabel('Strength of passwords')
+
+# plt.legend(loc=1)
+
+plt.show()
+
+
+
+
+plt.plot(x,guessOriginal,color="red",label="original")
+plt.plot(x,guessGenerated,color="green",label="generated")
+plt.xlabel('Passwords')
+plt.ylabel('Approx. guesses to break (log10)')
+
+# plt.legend(loc=1)
+
+plt.show()
+
+
+
+plt.plot(x,crackOriginal,color="red",label="original")
+plt.plot(x,crackGenerated,color="green",label="generated")
+plt.xlabel('Passwords')
+plt.ylabel('Approx. time to crack passwords (xe12)')
+
+# plt.legend(loc=1)
+
+plt.show()
 
 
