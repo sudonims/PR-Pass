@@ -10,8 +10,8 @@
         "scripts":["background.js"]
     },
     "permissions": ["storage","notifications"],
-    "name": "password generator",
-    "version": "1.4",
+    "name": "PR-Pass",
+    "version": "1.0.5",
     "description": "Easy to create passwords",
     "author": "Ekansh Gupta - Nimish Shah",
     "manifest_version": 2

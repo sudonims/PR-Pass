@@ -1,11 +1,3 @@
-// const url=chrome.runtime.getURL('cipher.json');
-//     fetch(url).then(function(res){
-//         res.json();
-//     }).then(function(json){
-//         console.log(json);
-//     });
-
-// console.log('AB'.charCodeAt(1));
 
 var sample = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
     "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
@@ -45,10 +37,6 @@ function add(a, b) {
     return ans.toString();
 }
 
-// console.log(add("aaa","bb"));
-
-
-
 var xhr = new XMLHttpRequest();
 var data;
 xhr.open('GET', chrome.extension.getURL('cipher.json'), true);
@@ -82,8 +70,10 @@ xhr.onreadystatechange = () => {
                         luck += 100;
                         luck %= 72;
                         ans1 = sample[luck].toString();
-                        ans1 = ans1.repeat(12);
-                        console.log('initial', ans1);
+                        for(let i=1;i<12;i++){
+                            ans1+= sample[(ans1[i-1].charCodeAt(0))%72]
+                        }
+                        // console.log('initial', ans1);
                         // ans1.replace(ans1[0],)
 
                         for (let i = 0; i < ans.length; i++) {
