@@ -9,6 +9,9 @@
     "background":{
         "scripts":["background.js"]
     },
+    "icons" : {
+        "48" :"icon.png"
+    },
     "permissions": ["storage","notifications"],
     "name": "PR-Pass",
     "version": "1.0.5",

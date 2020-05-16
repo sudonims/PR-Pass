@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded',function(){
             chrome.storage.sync.set({lucky:l_num},function(){
                 chrome.notifications.create("success",{
                     "type":"basic",
-                    "iconUrl" : "LogoMakr_1TxqbI1.png",
+                    "iconUrl" : "logo.png",
                     "title" : "success",
                     "message":"Lucky Number Successfully saved"
                 });
