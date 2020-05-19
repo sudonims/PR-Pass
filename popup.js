@@ -1,10 +1,11 @@
-document.addEventListener('DOMContentLoaded',function(){
+document.addEventListener('DOMContentLoaded',async function(){
     var submit=document.getElementById('submit');
     var lucky=document.getElementById('lucky');
     var pass=document.getElementById('password');
     var gen_pass=document.getElementById('gen-pass');
     var edit=document.getElementById('edit');
     var body=document.getElementById('body');
+    var copy = document.getElementById('copy');
 
     submit.addEventListener('click',function(){
         // chk=new RegExp("hide");
@@ -76,5 +77,24 @@ document.addEventListener('DOMContentLoaded',function(){
         }
     });
     
+    copy.addEventListener('click',async function(){
+        chrome.storage.sync.get(['gen_pass'],async function(res){
+            await navigator.clipboard.writeText(res.gen_pass).then(function(){
+                chrome.notifications.create("copy_success",{
+                    "type":"basic",
+                    "iconUrl" : "logo.png",
+                    "title" : "copy success",
+                    "message":"Password copied on Clipboard successfully"
+                });
+            },function(){
+                chrome.notifications.create("copy_fail",{
+                    "type":"basic",
+                    "iconUrl" : "logo.png",
+                    "title" : "copy_fail",
+                    "message":"Could not copy... Try reloading the extension"
+                });
+            })
+        })
+    })
 
 });
