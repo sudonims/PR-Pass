@@ -26,11 +26,11 @@
 
 // console.log('a')
 
-a= new String("foo");
-b=new String("foo");
-c="foo"
-d="foo"
-console.log(a==d);
+a = new String("foo");
+b = new String("foo");
+c = "foo";
+d = "foo";
+console.log(a == d);
 
-console.log('11'+'1');
-console.log('11'-'1');
+console.log("11" + "1");
+console.log("11" - "1");

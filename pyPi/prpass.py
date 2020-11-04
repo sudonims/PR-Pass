@@ -34,13 +34,13 @@ class pr_pass(object):
 
     def gen_pass(self, password, num=None):
         if num == None:
-          if self.num != None:
-              luck = self.num
-          else:
-            return "Check docs again"
+            if self.num != None:
+                luck = self.num
+            else:
+                return "Check docs again"
         else:
-          luck = num
-        
+            luck = num
+
         luck1 = str(luck % 5)
         ans = ""
         for i in range(len(password)):
