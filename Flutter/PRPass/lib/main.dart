@@ -1,62 +1,43 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(PRPass());
 }
 
-class MyApp extends StatelessWidget {
+class PRPass extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: MyHomePage(title: 'PR Pass'),
+      theme: ThemeData(primaryColor: Colors.purple[900]),
+      home: HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-
+class HomePage extends StatefulWidget {
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  HomePageState createState() => HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+class HomePageState extends State<HomePage> {
+  Widget _getInput() {
+    return Container(
+      child: Center(
+        child: TextField(
+          decoration: InputDecoration(
+              border: OutlineInputBorder(), labelText: 'Enter Lucky Number'),
+        ),
+      ),
+      padding: const EdgeInsets.all(20.0),
+    );
   }
 
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('PR Pass'),
       ),
-      body: Center(
-          child: Container(
-        child: Form(
-          child: Column(
-            children: [
-              TextFormField(
-                  decoration: const InputDecoration(hintText: 'Enter a number'))
-            ],
-          ),
-        ),
-      )),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+      body: _getInput(),
     );
   }
 }
