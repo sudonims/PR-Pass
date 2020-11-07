@@ -403,19 +403,19 @@ Map data = {
 List wrap(String pass) {
   var ans = new List();
   int i;
-  for (i = 0; i+12 <= pass.length; i += 12) {
+  for (i = 0; i + 12 <= pass.length; i += 12) {
     String a = pass.substring(i, i + 12);
     ans.add(a);
   }
-  ans.add(pass.substring(i,pass.length));
+  ans.add(pass.substring(i, pass.length));
   return ans;
 }
 
 String Add(String a, String b) {
-  print(a);
-  print(b);
+  // print(a);
+  // print(b);
   if (a == "") return b;
-  String ans="";
+  String ans = "";
   if (a.length == b.length) {
     for (int i = 0; i < a.length; i++) {
       ans += sample[(a[i].codeUnitAt(0) + b[i].codeUnitAt(0)) % 72];
@@ -429,12 +429,15 @@ String Add(String a, String b) {
   return ans;
 }
 
-String generatePassword(String pass, int luck) { 
+String generatePassword(String pass, String luck_) {
+  var luck = int.parse(luck_);
+  // print("luck" + luck.toString());
+  // print("Pass" + pass);
   var luck1 = luck % 5;
   String a;
   String ans = "";
   for (int i = 0; i < pass.length; i++) {
-    a=pass[i];
+    a = pass[i];
     if (def_lt.contains(a)) {
       ans += data[luck1][a];
     } else {
