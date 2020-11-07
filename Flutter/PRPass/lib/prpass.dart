@@ -1,0 +1,3 @@
+String generatePassword() {
+  return "Hi";
+}

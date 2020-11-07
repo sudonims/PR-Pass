@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import './prpass.dart';
 
 void main() {
   runApp(PRPass());
@@ -24,9 +25,9 @@ class HomePageState extends State<HomePage> {
   String plainText = '';
   String number = '';
 
-  String generatePassword_(String plainText, String number) {
-    return plainText + number;
-  }
+  // String generatePassword_(String plainText, String number) {
+  //   return plainText + number;
+  // }
 
   Widget _getInput() {
     return Container(
@@ -67,7 +68,7 @@ class HomePageState extends State<HomePage> {
                   builder: (BuildContext context) {
                     return AlertDialog(
                       title: const Text('Generated Password'),
-                      content: Text(generatePassword_(plainText, number)),
+                      content: Text(generatePassword()),
                       actions: <Widget>[
                         FlatButton(
                           onPressed: () {
@@ -79,8 +80,7 @@ class HomePageState extends State<HomePage> {
                             onPressed: () async {
                               Navigator.pop(context);
                               await Clipboard.setData(new ClipboardData(
-                                      text:
-                                          generatePassword_(plainText, number)))
+                                      text: generatePassword()))
                                   .then((_) {
                                 Scaffold.of(context).showSnackBar(
                                     SnackBar(content: Text("Copied")));
