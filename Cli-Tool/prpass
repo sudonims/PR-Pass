@@ -1,4 +1,25 @@
+#!/bin/env python
+
+import argparse
 import json
+
+parser = argparse.ArgumentParser(
+    description="PR Pass Generate passwords easily",
+    add_help=True,
+)
+
+parser.add_argument('-p', '--plaint_text', dest='plain_text', required=1,
+                    help="Get the passphrase")
+parser.add_argument('-n', '--lucky_num', dest='lucky_num', default=0,
+                    required=1, help="Get the lucky number", type=int)
+parser.add_argument('-V', '--version', action='version',
+                    version='%(prog)s 1.0.0')
+
+try:
+    arguments = parser.parse_args()
+except Exception as e:
+    print("Some Error Occured. Try reinstalling the package or updating to the latest version")
+    exit(0)
 
 
 class pr_pass(object):
@@ -79,12 +100,6 @@ class pr_pass(object):
         return ans1
 
 
-def test():
-    generator = pr_pass()
-    a = generator.gen_pass("Nimisah", 12)
-    generator_ = pr_pass(12)
-    b = generator_.gen_pass("Nimish")
-    print(a, b)
+a = pr_pass(arguments.lucky_num)
 
-
-test()
+print(a.gen_pass(arguments.plain_text))
