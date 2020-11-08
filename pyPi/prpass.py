@@ -1,4 +1,5 @@
 import json
+import pyperclip
 
 
 class pr_pass(object):
@@ -76,6 +77,7 @@ class pr_pass(object):
         luck %= len(ans1)
 
         ans1 = ans1[0:luck] + char3 + ans1[luck:len(ans1)]
+        pyperclip.copy(ans1)
         return ans1
 
 
@@ -85,6 +87,4 @@ def test():
     generator_ = pr_pass(12)
     b = generator_.gen_pass("Nimish")
     print(a, b)
-
-
 test()
