@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.log(l_num, in_pass);
 
     if (l_num != 0) {
-      chrome.storage.sync.set({ lucky: l_num }, function () {
-        chrome.notifications.create("success", {
+      browser.storage.local.set({ lucky: l_num }, function () {
+        browser.notifications.create("success", {
           type: "basic",
           iconUrl: "logo.png",
           title: "success",
@@ -38,8 +38,8 @@ document.addEventListener("DOMContentLoaded", async function () {
     // }
 
     if (in_pass != 0) {
-      chrome.storage.sync.set({ init_pass: in_pass }, function () {
-        chrome.runtime.sendMessage({ generate: true });
+      browser.storage.local.set({ init_pass: in_pass }, function () {
+        browser.runtime.sendMessage({ generate: true });
       });
       in_pass = 0;
     }
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     pass.remove();
   });
 
-  chrome.storage.sync.get(["lucky"], (data) => {
+  browser.storage.local.get(["lucky"], (data) => {
     if (data.lucky) {
       // gen_pass.innerHTML=data.lucky;
       // lucky.className+=" hide";
@@ -68,23 +68,23 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
   });
 
-  chrome.runtime.onMessage.addListener(function (
+  browser.runtime.onMessage.addListener(function (
     request,
     sender,
     sendResponse
   ) {
     if (request.generated) {
-      chrome.storage.sync.get(["gen_pass"], function (gen_p) {
+      browser.storage.local.get(["gen_pass"], function (gen_p) {
         gen_pass.innerHTML = gen_p.gen_pass;
       });
     }
   });
 
   copy.addEventListener("click", async function () {
-    chrome.storage.sync.get(["gen_pass"], async function (res) {
+    browser.storage.local.get(["gen_pass"], async function (res) {
       await navigator.clipboard.writeText(res.gen_pass).then(
         function () {
-          chrome.notifications.create("copy_success", {
+          browser.notifications.create("copy_success", {
             type: "basic",
             iconUrl: "logo.png",
             title: "copy success",
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", async function () {
           });
         },
         function () {
-          chrome.notifications.create("copy_fail", {
+          browser.notifications.create("copy_fail", {
             type: "basic",
             iconUrl: "logo.png",
             title: "copy_fail",

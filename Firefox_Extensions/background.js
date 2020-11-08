@@ -160,18 +160,18 @@ function add(a, b) {
 
 var xhr = new XMLHttpRequest();
 var data;
-xhr.open("GET", chrome.extension.getURL("cipher.json"), true);
+xhr.open("GET", browser.extension.getURL("cipher.json"), true);
 xhr.send();
 xhr.onreadystatechange = () => {
   if (xhr.readyState == 4) {
     data = xhr.response;
     data = JSON.parse(data);
     // console.log(data['0']['a']);
-    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
       if (request.generate == true) {
-        chrome.storage.sync.get(["init_pass"], (initPass) => {
+        browser.storage.local.get(["init_pass"], (initPass) => {
           console.log(initPass);
-          chrome.storage.sync.get(["lucky"], (lucky) => {
+          browser.storage.local.get(["lucky"], (lucky) => {
             console.log(lucky);
             var luck = parseInt(lucky.lucky);
             luck1 = luck % 5;
@@ -225,8 +225,8 @@ xhr.onreadystatechange = () => {
             // ans1=sample[luck] + sample[(luck+100)%72] + ans1;
             // ans1+=sample[((luck+200)%10)+62] + sample[(luck+300)%72];
             console.log(ans1);
-            chrome.storage.sync.set({ gen_pass: ans1 }, () => {
-              chrome.runtime.sendMessage({ generated: true });
+            browser.storage.local.set({ gen_pass: ans1 }, () => {
+              browser.runtime.sendMessage({ generated: true });
             });
           });
         });
@@ -234,7 +234,3 @@ xhr.onreadystatechange = () => {
     });
   }
 };
-
-// const print = (data)=>{
-//     console.log(data);
-// }
