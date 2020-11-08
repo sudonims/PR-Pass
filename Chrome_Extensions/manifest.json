@@ -1,0 +1,19 @@
+{
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "password generator"
+  },
+  "web_accessible_resources": ["cipher.json"],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "icons": {
+    "48": "logo.png"
+  },
+  "permissions": ["storage", "notifications"],
+  "name": "PR-Pass",
+  "version": "1.0.5",
+  "description": "Easy to create passwords",
+  "author": "Ekansh Gupta - Nimish Shah",
+  "manifest_version": 2
+}
