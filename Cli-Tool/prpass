@@ -2,6 +2,7 @@
 
 import argparse
 import json
+import pyperclip
 
 parser = argparse.ArgumentParser(
     description="PR Pass Generate passwords easily",
@@ -97,6 +98,7 @@ class pr_pass(object):
         luck %= len(ans1)
 
         ans1 = ans1[0:luck] + char3 + ans1[luck:len(ans1)]
+        pyperclip.copy(ans1);
         return ans1
 
 
