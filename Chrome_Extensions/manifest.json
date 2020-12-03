@@ -12,7 +12,7 @@
   },
   "permissions": ["storage", "notifications"],
   "name": "PR-Pass",
-  "version": "1.0.5",
+  "version": "1.0.3",
   "description": "Easy to create passwords",
   "author": "Ekansh Gupta - Nimish Shah",
   "manifest_version": 2
