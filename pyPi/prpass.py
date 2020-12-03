@@ -64,7 +64,7 @@ class pr_pass(object):
         luck += len(password) + (len(ans) * len(password))
         luck %= 72
         char1 = self.sample[(luck % 26) + 26] + \
-            self.sample[((luck + 111) % 10) + 62]
+            self.sample[((luck + 111) % 10) + 52]
         char3 = self.sample[((luck + 222) % 10) + 62] + \
             self.sample[(luck + 300) % 26]
         # // console.log(char1, char3);
@@ -87,4 +87,6 @@ def test():
     generator_ = pr_pass(12)
     b = generator_.gen_pass("Nimish")
     print(a, b)
+
+
 test()

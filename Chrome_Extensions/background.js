@@ -73,61 +73,6 @@ var sample = [
   "?",
 ];
 
-var def_lt = [
-  "a",
-  "b",
-  "c",
-  "d",
-  "e",
-  "f",
-  "g",
-  "h",
-  "i",
-  "j",
-  "k",
-  "l",
-  "m",
-  "n",
-  "o",
-  "p",
-  "q",
-  "r",
-  "s",
-  "t",
-  "u",
-  "v",
-  "w",
-  "x",
-  "y",
-  "z",
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-  "G",
-  "H",
-  "I",
-  "J",
-  "K",
-  "L",
-  "M",
-  "N",
-  "O",
-  "P",
-  "Q",
-  "R",
-  "S",
-  "T",
-  "U",
-  "V",
-  "W",
-  "X",
-  "Y",
-  "Z",
-];
-
 const wrap = (string) => {
   ans = [];
   for (let i = 0; i < string.length; i += 12) {
@@ -176,11 +121,10 @@ xhr.onreadystatechange = () => {
             var luck = parseInt(lucky.lucky);
             luck1 = luck % 5;
             luck1 = `${luck1}`;
-            console.log(luck1, typeof luck1);
             var ans = "";
             for (let i = 0; i < initPass.init_pass.length; i++) {
               a = initPass.init_pass[i];
-              if (def_lt.includes(a)) {
+              if (/[a-zA-Z]/.test(a)) {
                 ans += data[luck1][a];
               } else {
                 ans += a;
@@ -194,24 +138,17 @@ xhr.onreadystatechange = () => {
             for (let i = 1; i < 12; i++) {
               ans1 += sample[ans1[i - 1].charCodeAt(0) % 72];
             }
-            // console.log('initial', ans1);
-            // ans1.replace(ans1[0],)
 
             for (let i = 0; i < ans.length; i++) {
               ans1 = add(ans1, ans[i]);
-              // console.log('in loop',ans1);
             }
-            console.log(ans1);
             luck +=
               initPass.init_pass.length +
               ans.length * initPass.init_pass.length;
             luck %= 72;
-            char1 = sample[(luck % 26) + 26] + sample[((luck + 111) % 10) + 62]; // HAVE SINGLE CHARS
+            char1 = sample[(luck % 26) + 26] + sample[((luck + 111) % 10) + 52]; // HAVE SINGLE CHARS
             char3 =
               sample[((luck + 222) % 10) + 62] + sample[(luck + 300) % 26];
-            console.log(char1, char3);
-
-            // luck = rand_()                                ===========CHANGE==========
 
             luck = (initPass.init_pass.length * luck) % ans1.length;
 
@@ -222,9 +159,6 @@ xhr.onreadystatechange = () => {
 
             ans1 = ans1.slice(0, luck) + char3 + ans1.slice(luck, ans1.length);
 
-            // ans1=sample[luck] + sample[(luck+100)%72] + ans1;
-            // ans1+=sample[((luck+200)%10)+62] + sample[(luck+300)%72];
-            console.log(ans1);
             chrome.storage.sync.set({ gen_pass: ans1 }, () => {
               chrome.runtime.sendMessage({ generated: true });
             });

@@ -206,7 +206,7 @@ xhr.onreadystatechange = () => {
               initPass.init_pass.length +
               ans.length * initPass.init_pass.length;
             luck %= 72;
-            char1 = sample[(luck % 26) + 26] + sample[((luck + 111) % 10) + 62]; // HAVE SINGLE CHARS
+            char1 = sample[(luck % 26) + 26] + sample[((luck + 111) % 10) + 52]; // HAVE SINGLE CHARS
             char3 =
               sample[((luck + 222) % 10) + 62] + sample[(luck + 300) % 26];
             console.log(char1, char3);

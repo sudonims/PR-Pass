@@ -456,7 +456,7 @@ String generatePassword(String pass, String luck_) {
   }
   luck += pass.length + ans1.length * pass.length;
   luck %= 72;
-  String char1 = sample[(luck % 26) + 26] + sample[((luck + 111) % 10) + 62];
+  String char1 = sample[(luck % 26) + 26] + sample[((luck + 111) % 10) + 52];
   String char3 = sample[((luck + 222) % 10) + 62] + sample[(luck + 300) % 26];
   luck = (pass.length * luck) % ans_final.length;
   ans_final = ans_final.substring(0, luck) +
