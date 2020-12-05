@@ -67,6 +67,7 @@ class FormInputState extends State<FormInput> {
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Enter Pass Phrase'),
+                obscureText: true,
                 onChanged: (String val) {
                   setState(() {
                     plainText = val;
