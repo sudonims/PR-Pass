@@ -1,0 +1,19 @@
+{
+  "name": "pr-pass",
+  "version": "1.0.3",
+  "description": "password generator",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sudonims/PR-Pass.git"
+  },
+  "author": "Ekansh Gupta - Nimish Shah",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sudonims/PR-Pass/issues"
+  },
+  "homepage": "https://github.com/sudonims/PR-Pass#readme"
+}

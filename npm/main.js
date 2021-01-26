@@ -1,3 +1,4 @@
+const data = require("./cipher.json");
 var sample = [
   "a",
   "b",
@@ -82,7 +83,7 @@ const wrap = (string) => {
   return ans;
 };
 
-function add(a, b) {
+const add = (a, b) => {
   a = a.toString();
   b = b.toString();
 
@@ -101,13 +102,12 @@ function add(a, b) {
     ans += a.slice(b.length, a.length);
   }
   return ans.toString();
-}
+};
 
 const generatePass = (initPass, lucky) => {
-  const data = require("./cipher.json");
   var luck = parseInt(lucky);
-  var luck1 = luck % 5;
-  luck1 = luck1.toString();
+  luck1 = luck % 5;
+  luck1 = `${luck1}`;
   var ans = "";
   for (let i = 0; i < initPass.length; i++) {
     a = initPass[i];
@@ -118,6 +118,7 @@ const generatePass = (initPass, lucky) => {
     }
   }
   ans = wrap(ans);
+  console.log("ans", ans);
   luck += 100;
   luck %= 72;
   ans1 = sample[luck].toString();
