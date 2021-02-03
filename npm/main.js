@@ -118,7 +118,6 @@ const generatePass = (initPass, lucky) => {
     }
   }
   ans = wrap(ans);
-  console.log("ans", ans);
   luck += 100;
   luck %= 72;
   ans1 = sample[luck].toString();
