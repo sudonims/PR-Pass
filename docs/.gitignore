@@ -1,9 +1,7 @@
 # Dependencies
 /node_modules
 
-# Production
-/build
-
+# Productions
 # Generated files
 .docusaurus
 .cache-loader
