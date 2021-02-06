@@ -1,13 +1,29 @@
 ---
 id: doc1
-title: Style Guide
-sidebar_label: Style Guide
+title: APIs
+sidebar_label: APIs
 slug: /
 ---
 
-You can write content using [GitHub-flavored Markdown syntax](https://github.github.com/gfm/).
+## JavaScript
 
-## Markdown Syntax
+```
+npm install pr-pass
+
+//something.js
+const generatePass = require('pr-pass);
+
+// or you can do ES6 style import
+
+import generatePass from 'pr-pass';
+
+
+//generatePass takes 2 arguments and returns a string
+
+generatePass(lucky, word); // lucky is a non-zero number, word is a general string [a-zA-Z0-9]
+
+
+```
 
 To serve as an example page when styling markdown based Docusaurus sites.
 
@@ -29,9 +45,9 @@ To serve as an example page when styling markdown based Docusaurus sites.
 
 ## Emphasis
 
-Emphasis, aka italics, with *asterisks* or _underscores_.
+Emphasis, aka italics, with _asterisks_ or _underscores_.
 
-Strong emphasis, aka bold, with **asterisks** or __underscores__.
+Strong emphasis, aka bold, with **asterisks** or **underscores**.
 
 Combined emphasis with **asterisks and _underscores_**.
 
@@ -48,11 +64,11 @@ Strikethrough uses two tildes. ~~Scratch this.~~
    1. Ordered sub-list
 1. And another item.
 
-* Unordered list can use asterisks
+- Unordered list can use asterisks
 
-- Or minuses
+* Or minuses
 
-+ Or pluses
+- Or pluses
 
 ---
 
@@ -82,11 +98,11 @@ Some text to show that the reference links can follow later.
 
 Here's our logo (hover to see the title text):
 
-Inline-style: ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png 'Logo Title Text 1')
+Inline-style: ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
 
 Reference-style: ![alt text][logo]
 
-[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png 'Logo Title Text 2'
+[logo]: https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 2"
 
 Images from any folder can be used by providing path to file. Path should be relative to markdown file.
 
@@ -97,7 +113,7 @@ Images from any folder can be used by providing path to file. Path should be rel
 ## Code
 
 ```javascript
-var s = 'JavaScript syntax highlighting';
+var s = "JavaScript syntax highlighting";
 alert(s);
 ```
 
@@ -113,7 +129,7 @@ But let's throw in a <b>tag</b>.
 
 ```js {2}
 function highlightMe() {
-  console.log('This line can be highlighted!');
+  console.log("This line can be highlighted!");
 }
 ```
 

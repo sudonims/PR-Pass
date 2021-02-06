@@ -1,8 +1,8 @@
 module.exports = {
   title: "PR Pass",
   tagline: "An easy password generating solution.",
-  url: "https://your-docusaurus-test-site.com",
-  baseUrl: "/",
+  url: "https://sudonims.github.io/",
+  baseUrl: "/PR-Pass/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",

@@ -13,8 +13,9 @@ const features = [
     imageUrl: "img/undraw_docusaurus_mountain.svg",
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Easy to use, understand and secure sensitive data more effectively. Can
+        be easily installed and you can easily integrate in your platform <br />
+        Go to docs <a href="docs">here</a>
       </>
     ),
   },
@@ -23,8 +24,10 @@ const features = [
     imageUrl: "img/undraw_docusaurus_tree.svg",
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Focus on your sensitive data and passwords can be handled by this. Needs
+        no network permissions, we don't have any remote storage, you can easily
+        keep your password a secret by just using a number and a word and
+        generating passwords on-the-go :)
       </>
     ),
   },
