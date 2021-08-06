@@ -38,6 +38,8 @@
 
 This is a simple password generating solution so that you never have to remember complex passwords. Based on the inputs given by the user, A word and a Number, this tool generates passwords on-the-go which you can copy to the clipboard easily. The tool does not require any external connectivity and is pretty lightweight to use.
 
+<a href="https://docs.google.com/document/d/1SAVaEj-phsIYZ2DSfDnd4AcV0d4VIltyI4p8KXBLc5Y/edit?usp=sharing">See Paper for more info</a>
+
 ### Built With
 
 - JavaScript
