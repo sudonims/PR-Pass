@@ -1,7 +1,6 @@
 import React from "react";
 import clsx from "clsx";
 import Layout from "@theme/Layout";
-import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.css";
@@ -58,7 +57,7 @@ function Home() {
     const generated = generatePass(key.value, lucky.value);
     document.getElementById(
       "pass"
-    ).innerHTML += `Generated Password is <b>${generated}</b> and you can easily use it by copying.<br /> See docs for more info`;
+    ).innerHTML += `<p style="color: black;">Generated Password is <b>${generated}</b> and you can easily use it by copying.<br /> See docs for more info</P`;
   };
   return (
     <Layout

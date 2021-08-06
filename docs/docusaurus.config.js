@@ -1,8 +1,8 @@
 module.exports = {
   title: "PR Pass",
   tagline: "An easy password generating solution.",
-  url: "https://sudonims.github.io/",
-  baseUrl: "/PR-Pass/",
+  url: "https://prpass.sudonims.tech",
+  baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
@@ -58,16 +58,7 @@ module.exports = {
       "@docusaurus/preset-classic",
       {
         docs: {
-          sidebarPath: require.resolve("./sidebars.js"),
-          // Please change this to your repo.
-          editUrl:
-            "https://github.com/facebook/docusaurus/edit/master/website/",
-        },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          editUrl:
-            "https://github.com/facebook/docusaurus/edit/master/website/blog/",
+          sidebarPath: require.resolve("./sidebars.js")
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
