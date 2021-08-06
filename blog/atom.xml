@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://sudonims.github.io/blog</id>
+    <id>https://prpass.sudonims.tech/blog</id>
     <title>PR Pass Blog</title>
     <updated>2015-10-25T23:29:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://sudonims.github.io/blog"/>
+    <link rel="alternate" href="https://prpass.sudonims.tech/blog"/>
     <subtitle>PR Pass Blog</subtitle>
-    <icon>https://sudonims.github.io/img/favicon.ico</icon>
+    <icon>https://prpass.sudonims.tech/img/favicon.ico</icon>
 </feed>
