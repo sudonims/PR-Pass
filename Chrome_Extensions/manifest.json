@@ -7,10 +7,17 @@
   "background": {
     "scripts": ["background.js"]
   },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "js": ["content.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
   "icons": {
     "48": "logo.png"
   },
-  "permissions": ["storage", "notifications"],
+  "permissions": ["storage", "notifications", "contextMenus"],
   "name": "PR-Pass",
   "version": "1.0.3",
   "description": "Easy to create passwords",

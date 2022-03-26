@@ -103,72 +103,71 @@ function add(a, b) {
   return ans.toString();
 }
 
-var xhr = new XMLHttpRequest();
-var data;
-xhr.open("GET", chrome.extension.getURL("cipher.json"), true);
-xhr.send();
-xhr.onreadystatechange = () => {
-  if (xhr.readyState == 4) {
-    data = xhr.response;
-    data = JSON.parse(data);
-    // console.log(data['0']['a']);
-    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-      if (request.generate == true) {
-        chrome.storage.sync.get(["init_pass"], (initPass) => {
-          console.log(initPass);
-          chrome.storage.sync.get(["lucky"], (lucky) => {
-            console.log(lucky);
-            var luck = parseInt(lucky.lucky);
-            luck1 = luck % 5;
-            luck1 = `${luck1}`;
-            var ans = "";
-            for (let i = 0; i < initPass.init_pass.length; i++) {
-              a = initPass.init_pass[i];
-              if (/[a-zA-Z]/.test(a)) {
-                ans += data[luck1][a];
-              } else {
-                ans += a;
-              }
-            }
-            ans = wrap(ans);
-            console.log("ans", ans);
-            luck += 100;
-            luck %= 72;
-            ans1 = sample[luck].toString();
-            for (let i = 1; i < 12; i++) {
-              ans1 += sample[ans1[i - 1].charCodeAt(0) % 72];
-            }
-
-            for (let i = 0; i < ans.length; i++) {
-              ans1 = add(ans1, ans[i]);
-            }
-            luck +=
-              initPass.init_pass.length +
-              ans.length * initPass.init_pass.length;
-            luck %= 72;
-            char1 = sample[(luck % 26) + 26] + sample[((luck + 111) % 10) + 52]; // HAVE SINGLE CHARS
-            char3 =
-              sample[((luck + 222) % 10) + 62] + sample[(luck + 300) % 26];
-
-            luck = (initPass.init_pass.length * luck) % ans1.length;
-
-            ans1 = ans1.slice(0, luck) + char1 + ans1.slice(luck, ans1.length);
-
-            luck += initPass.init_pass.length + ans.length;
-            luck %= ans1.length;
-
-            ans1 = ans1.slice(0, luck) + char3 + ans1.slice(luck, ans1.length);
-
-            chrome.storage.sync.set({ gen_pass: ans1 }, () => {
-              chrome.runtime.sendMessage({ generated: true });
-            });
-          });
-        });
+function getData() {
+  return new Promise(function (resolve) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", chrome.extension.getURL("cipher.json"), true);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState == 4) {
+        resolve(JSON.parse(xhr.response));
       }
+    };
+  });
+}
+
+chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
+  const data = await getData().then((res) => res);
+  let ans1;
+  if (request.generate == true) {
+    const initPass = request.init_pass;
+    console.log(initPass);
+    chrome.storage.sync.get(["lucky"], (lucky) => {
+      console.log(lucky);
+      var luck = parseInt(lucky.lucky);
+      var luck1 = luck % 5;
+      luck1 = `${luck1}`;
+      var ans = "";
+      for (let i = 0; i < initPass.length; i++) {
+        a = initPass[i];
+        if (/[a-zA-Z]/.test(a)) {
+          ans += data[luck1][a];
+        } else {
+          ans += a;
+        }
+      }
+      ans = wrap(ans);
+      console.log("ans", ans);
+      luck += 100;
+      luck %= 72;
+      let ans1 = sample[luck].toString();
+      for (let i = 1; i < 12; i++) {
+        ans1 += sample[ans1[i - 1].charCodeAt(0) % 72];
+      }
+
+      for (let i = 0; i < ans.length; i++) {
+        ans1 = add(ans1, ans[i]);
+      }
+      luck += initPass.length + ans.length * initPass.length;
+      luck %= 72;
+      let char1 = sample[(luck % 26) + 26] + sample[((luck + 111) % 10) + 52]; // HAVE SINGLE CHARS
+      let char3 = sample[((luck + 222) % 10) + 62] + sample[(luck + 300) % 26];
+
+      luck = (initPass.length * luck) % ans1.length;
+
+      ans1 = ans1.slice(0, luck) + char1 + ans1.slice(luck, ans1.length);
+
+      luck += initPass.length + ans.length;
+      luck %= ans1.length;
+
+      ans1 = ans1.slice(0, luck) + char3 + ans1.slice(luck, ans1.length);
+
+      chrome.runtime.sendMessage({ generated: true, gen_pass: ans1 });
     });
   }
-};
+});
 
-// const print = (data)=>{
-//     console.log(data);
-// }
+chrome.contextMenus.create({
+  title: "Add Password",
+  contexts: ["editable"],
+});

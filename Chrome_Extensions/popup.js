@@ -9,12 +9,12 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   submit.addEventListener("click", function () {
     // chk=new RegExp("hide");
-    var l_num = lucky.value || 0;
-    var in_pass = pass.value || 0;
+    var l_num = lucky.value || null;
+    var in_pass = pass.value || null;
 
     console.log(l_num, in_pass);
 
-    if (l_num != 0) {
+    if (l_num !== null) {
       chrome.storage.sync.set({ lucky: l_num }, function () {
         chrome.notifications.create("success", {
           type: "basic",
@@ -26,35 +26,23 @@ document.addEventListener("DOMContentLoaded", async function () {
         lucky.value = "";
         lucky.remove();
         l_num = 0;
-        // lucky.className+=" hide";
-        // pass.className-=" hide";
-        // lucky.style.height='0px';
       });
     }
 
-    // if(!chk.test(lucky.className)){
-    //     var l_num=lucky.value;
-
-    // }
-
-    if (in_pass != 0) {
-      chrome.storage.sync.set({ init_pass: in_pass }, function () {
-        chrome.runtime.sendMessage({ generate: true });
+    if (in_pass !== null) {
+      chrome.runtime.sendMessage({
+        generate: true,
+        init_pass: in_pass,
       });
+
       in_pass = 0;
     }
-    // if(!chk.test(pass.className)){
-    //     var in_pass=pass.value;
-    //     chr
-    // }
     console.log(l_num, in_pass);
   });
 
   edit.addEventListener("click", function () {
-    // lucky.className-=" hide";
     lucky.value = "";
     body.insertBefore(lucky, pass);
-    // pass.className+=" hide";
 
     pass.value = "";
     pass.remove();
@@ -62,8 +50,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   chrome.storage.sync.get(["lucky"], (data) => {
     if (data.lucky) {
-      // gen_pass.innerHTML=data.lucky;
-      // lucky.className+=" hide";
       lucky.remove();
     }
   });
@@ -74,32 +60,28 @@ document.addEventListener("DOMContentLoaded", async function () {
     sendResponse
   ) {
     if (request.generated) {
-      chrome.storage.sync.get(["gen_pass"], function (gen_p) {
-        gen_pass.innerHTML = gen_p.gen_pass;
-      });
+      gen_pass.innerHTML = request.gen_pass;
     }
   });
 
-  copy.addEventListener("click", async function () {
-    chrome.storage.sync.get(["gen_pass"], async function (res) {
-      await navigator.clipboard.writeText(res.gen_pass).then(
-        function () {
-          chrome.notifications.create("copy_success", {
-            type: "basic",
-            iconUrl: "logo.png",
-            title: "copy success",
-            message: "Password copied on Clipboard successfully",
-          });
-        },
-        function () {
-          chrome.notifications.create("copy_fail", {
-            type: "basic",
-            iconUrl: "logo.png",
-            title: "copy_fail",
-            message: "Could not copy... Try reloading the extension",
-          });
-        }
-      );
-    });
+  copy.addEventListener("click", function () {
+    navigator.clipboard.writeText(gen_pass.innerHTML).then(
+      function () {
+        chrome.notifications.create("copy_success", {
+          type: "basic",
+          iconUrl: "logo.png",
+          title: "copy success",
+          message: "Password copied on Clipboard successfully",
+        });
+      },
+      function () {
+        chrome.notifications.create("copy_fail", {
+          type: "basic",
+          iconUrl: "logo.png",
+          title: "copy_fail",
+          message: "Could not copy... Try reloading the extension",
+        });
+      }
+    );
   });
 });
