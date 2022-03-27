@@ -104,21 +104,19 @@ function add(a, b) {
 }
 
 function getData() {
-  return new Promise(function (resolve) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", chrome.extension.getURL("cipher.json"), true);
-    xhr.send();
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState == 4) {
-        resolve(JSON.parse(xhr.response));
-      }
-    };
+  return new Promise(async function (resolve) {
+    const data = await fetch(chrome.runtime.getURL("cipher.json"), {
+      method: "GET",
+    })
+      .then((res) => res.json())
+      .then((response) => response);
+    console.log(data);
+    resolve(data);
   });
 }
 
 chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
   const data = await getData().then((res) => res);
-  let ans1;
   if (request.generate == true) {
     const initPass = request.init_pass;
     console.log(initPass);
@@ -162,12 +160,36 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
 
       ans1 = ans1.slice(0, luck) + char3 + ans1.slice(luck, ans1.length);
 
-      chrome.runtime.sendMessage({ generated: true, gen_pass: ans1 });
+      if (request.inExt) {
+        chrome.runtime.sendMessage({
+          generated: true,
+          gen_pass: ans1,
+        });
+      } else {
+        chrome.tabs.query(
+          { active: true, currentWindow: true },
+          function (tabs) {
+            chrome.tabs.sendMessage(tabs[0].id, {
+              generated: true,
+              gen_pass: ans1,
+            });
+          }
+        );
+      }
     });
   }
 });
 
 chrome.contextMenus.create({
+  id: "0",
   title: "Add Password",
   contexts: ["editable"],
+});
+
+chrome.contextMenus.onClicked.addListener((info, tab) => {
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, {
+      contextClicked: true,
+    });
+  });
 });

@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       chrome.runtime.sendMessage({
         generate: true,
         init_pass: in_pass,
+        inExt: true,
       });
 
       in_pass = 0;
